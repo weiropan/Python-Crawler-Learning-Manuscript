@@ -49,10 +49,10 @@ URL是Uniform Resource Locator的简写，统一资源定位符。 一个URL由�
 
 `Chrome`浏览器是一个非常亲近开发者的浏览器。可以方便的查看网络请求以及发送的参数。对着网页`右键->检查`。然后就可以打开开发者选项。以下用图片来说明。  
 
-![1](D:\pachon\Python-Crawler-Learning-Manuscript\Chapter1-网络请求\1.png)
+![1](1.png)
 
-![2](D:\pachon\Python-Crawler-Learning-Manuscript\Chapter1-网络请求\2.png)
+![2](2.png)
 
-![2](D:\pachon\Python-Crawler-Learning-Manuscript\Chapter1-网络请求\3.png)
+![2](3.png)
 
-![2](D:\pachon\Python-Crawler-Learning-Manuscript\Chapter1-网络请求\4.png)
+![2](4.png)
