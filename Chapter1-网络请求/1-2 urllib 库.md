@@ -5,30 +5,47 @@
 在`Python3`的`urllib`库中，所有和网络请求相关的方法，都被集到`urllib.request`模块下面了，以先来看下`urlopen`函数基本的使用：
 
 ```python
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Oct 11 21:57:44 2018
+@author: weiro
+"""
+
 from urllib import request
-resp = request.urlopen('http://www.baidu.com')
+url = 'https://www.sogou.com/'
+resp = request.urlopen(url)
 print(resp.read())
+
+print(type(resp)) # 返回值是一个http.client.HTTPResponse对象
 ```
 
-实际上，使用浏览器访问百度，右键查看源代码。你会发现，跟我们刚才打印出来的数据是一模一样的。也就是说，上面的三行代码就已经帮我们把百度的首页的全部代码爬下来了。一个基本的url请求对应的python代码真的非常简单。
+以上三行代码的作用是打印出搜狗首页的全部代码。使用浏览器访问搜狗首页时，右键查看源代码，会发现跟我们刚才打印出来的数据是一模一样的。
+
 以下对`urlopen`函数的进行详细讲解：
 
-1. `url`：请求的url。
-2. `data`：请求的`data`，如果设置了这个值，那么将变成`post`请求。
-3. 返回值：返回值是一个`http.client.HTTPResponse`对象，这个对象是一个类文件句柄对象。有`read(size)`、`readline`、`readlines`以及`getcode`等方法。
+1. 默认情况下 request.urlopen(url) 处理的是 get 请求, request.urlopen(url,data) 处理的是 post 请求。 
+2. url`：请求的url。
+3. `data`：请求的`data`，如果设置了这个值，那么将变成`post`请求。
+4. 返回值：返回值是一个`http.client.HTTPResponse`对象，这个对象是一个**类文件句柄对象**。有`read(size)`、`readline`、`readlines`以及`getcode`（获取当前响应状态码）等方法。
 
 ### urlretrieve函数：
 
-这个函数可以方便的将网页上的一个文件保存到本地。以下代码可以非常方便的将百度的首页下载到本地：
+这个函数可以方便的将网页上的一个文件保存到本地。可以迅捷的下载你想要爬取的图片、网页、视屏等。
+
+以下代码可以非常方便的将一张图片下载到本地：
 
 ```python
 from urllib import request
-request.urlretrieve('http://www.baidu.com/','baidu.html')
+url = 'https://img04.sogoucdn.com/app/a/100520024/77b176fe026f1813790b0e8a176c2e3b'
+filename = 'beautiful.png'
+request.urlretrieve(url,filename)
 ```
 
-### urlencode函数：
+### 参数编码与解码函数
 
-用浏览器发送请求的时候，如果url中包含了中文或者其他特殊字符，那么浏览器会自动的给我们进行编码。而如果使用代码发送请求，那么就必须手动的进行编码，这时候就应该使用`urlencode`函数来实现。`urlencode`可以把字典数据转换为`URL`编码的数据。示例代码如下：
+#### urlencode函数：
+
+用浏览器发送请求的时候，如果url中包含了**中文或者其他特殊字符**，那么浏览器会自动进行编码。而如果使用代码发送请求，那么就必须手动的进行编码，这时候就应该使用`urlencode`函数来实现。`urlencode`可以把字典数据转换为`URL`编码的数据。示例代码如下：
 
 ```python
 from urllib import parse
@@ -37,7 +54,7 @@ qs = parse.urlencode(data)
 print(qs)
 ```
 
-### parse_qs函数：
+#### parse_qs函数：
 
 可以将经过编码后的url参数进行解码。示例代码如下：
 

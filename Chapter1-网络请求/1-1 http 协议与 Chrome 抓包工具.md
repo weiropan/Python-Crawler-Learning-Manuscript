@@ -1,13 +1,41 @@
-[TOC]
+
+
+### 爬虫的定义
+
+网络爬虫（又被称为网页蜘蛛，网络机器人，在FOAF社区中间，更经常的称为网页追逐者），是一种按照一定的规则，自动地抓取万维网信息的程序或者脚本。
+
+### 爬虫的作用
+
+- 市场分析：电商分析、商圈分析、一二级市场分析等
+- 市场监控：电商、新闻、房源监控等
+- 商机发现：招投标情报发现、客户资料发掘、企业客户发现等
 
 ------
+
+### 了解网址的构成
+
+一个网站的网址一般由域名+自己编写的页面所构成。我们在访问同一网站的网页时，域名一般是不会改变的，因此我们爬虫所需要解析的就是网站自己所编写的不同页面的入口url，只有解析出来各个页面的入口，我们才能开始我们的爬虫。
+
+### 网址的两种加载方式
+
+- 同步加载：改变网址上的某些参数会导致网页发生改变，例如：https://www.zhihu.com/people/pan-will-rong/followers?page=2（改变page=后面的数字，网页会发生改变）。
+- 异步加载：改变网址上的参数不会使网页发生改变，例如：https://www.lagou.com/jobs/list_%E5%95%86%E4%B8%9A%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90?labelWords=&fromSearch=true&suginput=（翻页后网址不会发生变化）
+
+### 认识网页源码的构成
+
+在网页中右键点击查看网页源码，可以查看到网页的源代码信息。源代码一般由三个部分组成，分别是：
+
+- **[html](https://www.jb51.net/shouce/html/html.htm)：**描述网页的内容结构 
+- **[css](http://www.runoob.com/css/css-intro.html)：**描述网页的排版布局
+- **[JavaScript](http://www.runoob.com/js/js-intro.html)：**描述网页的事件处理，即鼠标或键盘在网页元素上的动作后的程序 
 
 ### 什么是 http 和 https 协议：
 
 - HTTP 协议： 全称是 HyperText Transfer Protocol, 中文意思是超文本传输协议，是一种发布与接收 HTML 页面的方法。服务器端口号是88端口。
 - HTTPS 协议： 是 HTTP 协议的加密版本，在 HTTP 下加入 SSL 层。服务器端口号是 433 端口。
 
-### 在浏览器中发送一个http请求的过程：
+### [在浏览器中发送一个http请求的过程](https://blog.csdn.net/allenjay11/article/details/51788026)：
+
 1. 当用户在浏览器的地址栏中输入一个URL并按回车键之后，浏览器会向HTTP服务器发送HTTP请求。HTTP请求主要分为“Get”和“Post”两种方法。
 2. 当我们在浏览器输入URL <http://www.baidu.com> 的时候，浏览器发送一个Request请求去获取 http://www.baidu.com> 的html文件，服务器把Response文件对象发送回给浏览器。
 3. 浏览器分析Response中的 HTML，发现其中引用了很多其他文件，比如Images文件，CSS文件，JS文件。 浏览器会自动再次发送Request去获取图片，CSS文件，或者JS文件。
@@ -57,12 +85,47 @@ scheme://host:port/path/?query-string#xxx#anchor
 
 ### Chrome抓包工具：
 
-`Chrome`浏览器是一个非常亲近开发者的浏览器。可以方便的查看网络请求以及发送的参数。对着网页`右键->检查`。然后就可以打开开发者选项。以下用图片来说明。  
+`Chrome`浏览器是一个非常亲近开发者的浏览器。可以方便的查看网络请求以及发送的参数。对着网页`右键->检查`。然后就可以打开开发者选项。以下用图片来说明。 
 
 ![1](imags/1.png)
 
 ![2](imags/2.png)
 
 ![3](imags/3.png)
+
+#### 查看网页请求
+
+以chrome浏览器为例，在网页上点击鼠标右键，检查（或者直接F12），选择network，刷新页面，选择ALL下面的第一个链接，这样就可以看到网页的各种请求信息。
+
+**请求头（Request Headers）信息详解：**
+- Accept: text/html,image/*(浏览器可以接收的类型)
+- Accept-Charset: ISO-8859-1(浏览器可以接收的编码类型)
+- Accept-Encoding: gzip,compress(浏览器可以接收压缩编码类型)
+- Accept-Language: en-us,zh-cn(浏览器可以接收的语言和国家类型)
+- Host: www.it315.org:80(浏览器请求的主机和端口)
+- If-Modified-Since: Tue, 11 Jul 2000 18:23:51 GMT(某个页面缓存时间)
+- Referer: http://www.it315.org/index.jsp(请求来自于哪个页面)
+- User-Agent: Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)(浏览器相关信息)
+- Cookie：(浏览器暂存服务器发送的信息)
+- Connection: close(1.0)/Keep-Alive(1.1)(HTTP请求的版本的特点)
+- Date: Tue, 11 Jul 2000 18:23:51 GMT(请求网站的时间)
+
+**响应头（Response Headers）信息详解：**
+- Location: http://www.it315.org/index.jsp(控制浏览器显示哪个页面)
+- Server:apache tomcat(服务器的类型)
+- Content-Encoding: gzip(服务器发送的压缩编码方式)
+- Content-Length: 80(服务器发送显示的字节码长度)
+- Content-Language: zh-cn(服务器发送内容的语言和国家名)
+- Content-Type: image/jpeg; charset=UTF-8(服务器发送内容的类型和编码类型)
+- Last-Modified: Tue, 11 Jul 2000 18:23:51 GMT(服务器最后一次修改的时间)
+- Refresh: 1;url=http://www.it315.org(控制浏览器1秒钟后转发URL所指向的页面)
+- Content-Disposition: attachment; filename=aaa.jpg(服务器控制浏览器发下载方式打开文件)
+- Transfer-Encoding: chunked(服务器分块传递数据到客户端） 
+- Set-Cookie:SS=Q0=5Lb_nQ; path=/search(服务器发送Cookie相关的信息)
+- Expires: -1(服务器控制浏览器不要缓存网页，默认是缓存)
+- Cache-Control: no-cache(服务器控制浏览器不要缓存网页)
+- Pragma: no-cache(服务器控制浏览器不要缓存网页) 
+- Connection: close/Keep-Alive(HTTP请求的版本的特点)  
+- Date: Tue, 11 Jul 2000 18:23:51 GMT(响应网站的时间)
 
 ![4](imags/4.png)
