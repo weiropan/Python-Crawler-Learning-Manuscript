@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Python-Crawler-Learning-Manuscript.iml" filepath="$PROJECT_DIR$/.idea/Python-Crawler-Learning-Manuscript.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Python_spider_coding/.idea/Python_spider_coding.iml" filepath="$PROJECT_DIR$/../Python_spider_coding/.idea/Python_spider_coding.iml" />
+      <module fileurl="file://D:/python编程从入门到实践/python_learning_coding/.idea/python_learning_coding.iml" filepath="D:/python编程从入门到实践/python_learning_coding/.idea/python_learning_coding.iml" />
+    </modules>
+  </component>
+</project>
